@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "1076632066308",
+    "project_id": "new-emergency-phone",
+    "storage_bucket": "new-emergency-phone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076632066308:android:2302bd3aee862c5b3c1851",
+        "android_client_info": {
+          "package_name": "com.example.emergency_phone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076632066308-u5g322opi755mt131irqp1kg9j4o9ptc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzUwqp_eXToqgpvs_ntgmOC7BpMxOc8JM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076632066308-u5g322opi755mt131irqp1kg9j4o9ptc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076632066308-ph5r6dr2i5afljmnfrmkmbno6plqu2k1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.newEmergencyPhone"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076632066308:android:3161daf93e91b1a63c1851",
+        "android_client_info": {
+          "package_name": "com.example.new_emergency_phone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076632066308-u5g322opi755mt131irqp1kg9j4o9ptc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzUwqp_eXToqgpvs_ntgmOC7BpMxOc8JM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076632066308-u5g322opi755mt131irqp1kg9j4o9ptc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076632066308-ph5r6dr2i5afljmnfrmkmbno6plqu2k1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.newEmergencyPhone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
