@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:new_emergency_phone/common.dart';
+import 'package:new_emergency_phone/main.dart';
 
 class CommentPage extends StatefulWidget {
   const CommentPage({super.key});
@@ -13,7 +15,8 @@ class CommentPage extends StatefulWidget {
 class _CommentPageState extends State<CommentPage> {
   Stream<QuerySnapshot> _messageStream =
       FirebaseFirestore.instance.collection('Messages').orderBy('time').snapshots();
-  final TextEditingController message = new TextEditingController();
+  final TextEditingController message = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final fs = FirebaseFirestore.instance;
 
   @override
@@ -61,15 +64,16 @@ class _CommentPageState extends State<CommentPage> {
                   backgroundColor: AppColor.violet,
                 ),
                 onPressed: () {
-                  // if (message.text.isNotEmpty) {
-                  //   fs.collection('Messages').doc().set({
-                  //     'message': message.text.trim(),
-                  //     'time': DateTime.now(),
-                  //     'email':
-                  //         homeController.isAdmin.value ? "Admin" : _auth.currentUser?.email ?? "",
-                  //   });
+                  if (message.text.isNotEmpty) {
+                    fs.collection('Messages').doc().set({
+                      'message': message.text.trim(),
+                      'time': DateTime.now(),
+                      'email':
+                          homeController.isAdmin.value ? "Admin" : _auth.currentUser?.email ?? "",
+                    });
 
-                  //   message.clear();
+                    message.clear();
+                  }
                 },
                 child: Text(
                   "ส่ง",
@@ -106,61 +110,63 @@ class _CommentPageState extends State<CommentPage> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 70),
                     child: ListView.builder(
-                        reverse: true,
-                        shrinkWrap: true,
-                        primary: true,
-                        physics: ScrollPhysics(),
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (_, index) {
-                          QueryDocumentSnapshot qs = snapshot.data!.docs[index];
-                          Timestamp t = qs['time'];
-                          DateTime d = t.toDate();
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      qs['email'],
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Text(
-                                      "${d.day}/${d.month}/${d.year} ${d.hour}:${d.minute}",
-                                      style: TextStyle(color: Colors.grey),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    qs['message'],
-                                    style: TextStyle(color: Colors.black87),
+                      reverse: true,
+                      shrinkWrap: true,
+                      primary: true,
+                      physics: ScrollPhysics(),
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (_, index) {
+                        QueryDocumentSnapshot qs = snapshot.data!.docs[index];
+                        Timestamp t = qs['time'];
+                        DateTime d = t.toDate();
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    qs['email'],
+                                    style: TextStyle(fontSize: 18),
                                   ),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    "${d.day}/${d.month}/${d.year} ${d.hour}:${d.minute}",
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  qs['message'],
+                                  style: TextStyle(color: Colors.black87),
                                 ),
-                                const SizedBox(height: 10),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Like",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black54,
-                                      ),
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Like",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black54,
                                     ),
-                                    const SizedBox(width: 10),
-                                    Icon(
-                                      Icons.favorite,
-                                      color: AppColor.violet,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Icon(
+                                    Icons.favorite,
+                                    color: AppColor.violet,
+                                  )
+                                ],
+                              ),
+                              const Divider(),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   );
                 }),
           ),
